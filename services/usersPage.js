@@ -1,4 +1,5 @@
-import { getCurrentUser, logout } from "../auth/authService.js";
+import { AuthService } from "../auth/authService.js";
+import { getCurrentUser } from "../auth/authUtils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const user = getCurrentUser();
@@ -7,18 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = "login.html";
     return;
   }
-
-  const allUsers = JSON.parse(localStorage.getItem("users") || "[]");
-  const patients = allUsers.filter(u => u.therapist_id === user.id && u.role === "patient");
+  console.log("todos los usuarios ", AuthService.users.filter(u => u.therapist_id === user.id));
+  const patients = AuthService.users.filter(u => u.therapist_id === user.id && u.role === "user");
 
   const table = document.getElementById("usersTable");
-  patients.forEach(p => {
+  console.log("tabla de pacientes ", table);
+  console.log("pacientes ", patients);
+  patients.forEach(paciente => {
+    console.log("paciente ", paciente);
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${p.name}</td>
-      <td>${p.email}</td>
+      <td>${paciente.name}</td>
+      <td>${paciente.email}</td>
       <td>
-        <a href="patient-events.html?userId=${p.id}" class="btn btn-sm btn-primary">Ver eventos</a>
+        <a href="patient-events.html?userId=${paciente.id}" class="btn btn-sm btn-primary">Ver eventos</a>
       </td>
     `;
     table.appendChild(row);

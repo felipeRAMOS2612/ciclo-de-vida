@@ -1,29 +1,37 @@
 export const AuthService = {
+    users: [
+        {
+            id: 1,
+            name: "Juan Pérez",
+            email: "juan@example.com",
+            password: "12345678",
+            therapist_id: 2,
+            role: "user"
+        },
+        {
+            id: 2,
+            name: "Ana López",
+            email: "ana@example.com",
+            password: "password123",
+            therapist_id: null,
+            role: "therapist"
+        }
+    ],
+
     register(user) {
-        console.log("usuario ", user);
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        if (users.find(u => u.email === user.email)) {
+        if (this.users.find(u => u.email === user.email)) {
             throw new Error("Ya existe un usuario con ese correo.");
         }
-        users.push(user);
-        localStorage.setItem("users", JSON.stringify(users));
+        user.id = this.users.length ? this.users[this.users.length - 1].id + 1 : 1;
+        this.users.push(user);
+        console.log("Usuarios actualizados:", this.users);
     },
 
     login(email, password) {
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        const user = users.find(u => u.email === email && u.password === password);
+        const user = this.users.find(u => u.email === email && u.password === password);
         if (!user) throw new Error("Credenciales inválidas");
-        console.log("Usuario encontrado:", user);
-        const currentUser = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            therapist_id: user.therapist_id || null,
-            role: user.role || "user"
-        };
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        return currentUser;
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        return user;
     },
 
     logout() {
@@ -31,23 +39,14 @@ export const AuthService = {
     },
 
     updateProfile(updatedUser) {
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const index = users.findIndex(u => u.id === updatedUser.id);
-    if (index !== -1) {
-        users[index] = {
-            ...users[index], 
-            ...updatedUser   
-        };
-        localStorage.setItem("users", JSON.stringify(users));
-        localStorage.setItem("currentUser", JSON.stringify(users[index]));
+        const index = this.users.findIndex(u => u.id === updatedUser.id);
+        if (index !== -1) {
+            this.users[index] = {
+                ...this.users[index],
+                ...updatedUser
+            };
+            localStorage.setItem("currentUser", JSON.stringify(this.users[index]));
+            console.log("Usuarios actualizados:", this.users);
         }
-    },
-
-    recoverPassword(email, newPassword) {
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        const user = users.find(u => u.email === email);
-        if (!user) throw new Error("Usuario no encontrado");
-        user.password = newPassword;
-        localStorage.setItem("users", JSON.stringify(users));
     }
 };
