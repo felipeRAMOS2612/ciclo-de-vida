@@ -53,7 +53,7 @@ Una herramienta visual y dinámica para registrar eventos personales y ver cómo
 
 - 🔵 **HTML5**
 - 🎨 **CSS3 / Bootstrap 5**
-- ⚙️ **JavaScript**
+- ⚙️ **JavaScript (MODULAR)**
 - 🧠 **localStorage** para persistencia
 
 ---
@@ -64,3 +64,9 @@ Una herramienta visual y dinámica para registrar eventos personales y ver cómo
    ```bash
    git clone https://github.com/tu-usuario/visualizador-ciclos.git
    cd visualizador-ciclos
+
+2. Ejecuta en un servidor:
+    ```bash
+    python -m http.server 8000```
+    
+    o utiliza cualquier servidor local de tu preferencia.
