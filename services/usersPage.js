@@ -8,14 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = "login.html";
     return;
   }
-  console.log("todos los usuarios ", AuthService.users.filter(u => u.therapist_id === user.id));
   const patients = AuthService.users.filter(u => u.therapist_id === user.id && u.role === "user");
 
   const table = document.getElementById("usersTable");
-  console.log("tabla de pacientes ", table);
-  console.log("pacientes ", patients);
   patients.forEach(paciente => {
-    console.log("paciente ", paciente);
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${paciente.name}</td>

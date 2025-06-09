@@ -33,7 +33,6 @@ function deleteEvent(id) {
 function showEventDetails(event) {
   const modalTitle = document.getElementById("eventDetailModalLabel");
   const modalBody = document.getElementById("eventDetailBody");
-  console.log("modal title ", modalTitle);
   modalTitle.textContent = `${event.category.toUpperCase()}`;
   modalBody.innerHTML = `
     <p><strong>Descripción:</strong> ${event.description}</p>

@@ -26,7 +26,6 @@ export function renderEventList(events, onDelete, onDetails) {
         <button class="btn btn-sm btn-outline-danger ms-2">✕</button>
       </div>
     `;
-    console.log("item ", item.querySelector); 
         item.addEventListener("click", () => onDetails(event));
         item.querySelector("button").addEventListener("click", () => onDelete(event.uid));
         list.appendChild(item);
