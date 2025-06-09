@@ -1,4 +1,4 @@
-export function renderEventList(events, onDelete) {
+export function renderEventList(events, onDelete, onDetails) {
     const list = document.getElementById("eventItems");
     list.innerHTML = "";
 
@@ -12,7 +12,7 @@ export function renderEventList(events, onDelete) {
 
     events.forEach((event) => {
         const item = document.createElement("li");
-        item.className = "list-group-item d-flex justify-content-between align-items-center";
+        item.className = "list-group-item d-flex justify-content-between align-items-center event-item";
         item.innerHTML = `
       <span>
         <span class="w-100 d-flex flex-column" style="max-width: 230px">
@@ -26,20 +26,8 @@ export function renderEventList(events, onDelete) {
         <button class="btn btn-sm btn-outline-danger ms-2">✕</button>
       </div>
     `;
-        item.addEventListener("click", (e) => {
-            if (e.target.tagName === "BUTTON") return;
-
-            const modalBody = document.getElementById("eventDetailBody");
-            modalBody.innerHTML = `
-                <p><strong>Categoría:</strong> ${event.category}</p>
-                <p><strong>Descripción:</strong><br>${event.description}</p>
-                <p><strong>Fecha:</strong> ${event.date}</p>
-                <p><strong>Color:</strong> <span class="badge" style="background:${event.color};">&nbsp;&nbsp;&nbsp;</span></p>
-            `;
-
-            const modal = new bootstrap.Modal(document.getElementById("eventDetailModal"));
-            modal.show();
-        });
+    console.log("item ", item.querySelector); 
+        item.addEventListener("click", () => onDetails(event));
         item.querySelector("button").addEventListener("click", () => onDelete(event.uid));
         list.appendChild(item);
     });

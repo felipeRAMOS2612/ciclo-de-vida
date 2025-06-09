@@ -1,7 +1,7 @@
 export const StorageService = {
-    load() {
+    load(userId) {
         const data = localStorage.getItem("lifeEvents") || "[]";
-        return JSON.parse(data);
+        return JSON.parse(data).filter(e => e.userId === userId);
     },
 
     save(events) {
@@ -9,7 +9,7 @@ export const StorageService = {
     },
 
     delete(events, uid) {
-        const updated = events.filter(event => event.uid !== uid);
+        const updated = events.filter(e => e.uid !== uid);
         this.save(updated);
         return updated;
     }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Agregar enlace a jQuery y Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/pages/home.html">
+                <img src="../src/images/logo-black.webp" alt="Logo" width="85" height="80" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn me-2" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success" href="register.html">Registrarse</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center align-items-center mt-4">
+        <div class="card shadow-lg p-4" style="width: 400px;">
+            <h2 class="text-center mb-4">Registrar Usuario</h2>
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nombre completo" required />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" placeholder="Correo" required />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña" required />
+                </div>
+                <div class="mb-3" hidden>
+                    <label for="role" class="form-label">Rol</label>
+                    <select id="role" disabled class="form-select">
+                        <option selected value="user">Usuario</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Registrar</button>
+            </form>
+        </div>
+    </div>
+    <script type="module">
+        import { AuthService } from "../auth/authService.js";
+
+        function validatePassword(password) {
+            return password.length >= 8 &&
+                password.length <= 20 &&
+                /[A-Z]/.test(password) &&
+                /[a-z]/.test(password) &&
+                /\d/.test(password)
+        }
+
+        document.getElementById("registerForm").addEventListener("submit", e => {
+            e.preventDefault();
+            console.log("name ", e.target.name.value);
+            const user = {
+                id: Date.now().toString(),
+                name: e.target.name.value,
+                email: e.target.email.value,
+                password: e.target.password.value,
+                role: e.target.role.value,
+                therapist_id: null
+            };
+            console.log("password del usuario", user);
+            if (!validatePassword(user.password)) {
+                alert("La contraseña debe tener entre 8-20 caracteres, mayúsculas, minúsculas, números.");
+                return;
+            }
+
+            try {
+                AuthService.register(user);
+                alert("Usuario registrado. Ahora puedes iniciar sesión.");
+                window.location.href = "login.html";
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+    </script>
+</body>
+
+</html>
