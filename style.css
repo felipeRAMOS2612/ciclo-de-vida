@@ -1,0 +1,9 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+#cycleCanvas {
+    border: 1px solid #ddd;
+    background: #fdfdfd;
+    border-radius: 50%;
+}
