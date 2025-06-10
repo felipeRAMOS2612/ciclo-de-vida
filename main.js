@@ -1,5 +1,5 @@
 import { LifeEvent } from "/types/lifeEvents.js";
-import { StorageService } from "/services/storageService.js";
+import { StorageService } from "./services/storageService.js";
 import { Filters } from "/utils/filters.js";
 import { CanvasRenderer } from "/ui/canvasRender.js";
 import { renderEventList } from "/ui/eventListRender.js";

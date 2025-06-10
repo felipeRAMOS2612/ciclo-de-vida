@@ -1,17 +1,53 @@
 <!-- pages/patient-events.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eventos del Paciente</title>
-  <link rel="stylesheet" href="../style.css" />
-  <script type="module" src="../services/usersPage.js" defer></script>
+  
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/bootstrap.css" />
+  <script type="module" src="../services/patientEventsPage.js" defer></script>
 </head>
+
 <body>
-  <div class="container mt-4">
-    <h1>Eventos del paciente</h1>
-    <ul id="eventItems" class="list-group"></ul>
+  <div class="row">
+    <div id="sidebar-container" class="col-md-3 d-none d-md-block">
+    </div>
+    <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse"
+          aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="sidebarCollapse">
+          <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+              <a href="/index.html" class="nav-link text-dark">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a href="/pages/profile.html" class="nav-link text-dark">Mi Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a href="/pages/events.html" class="nav-link text-dark">Mis Eventos</a>
+            </li>
+            <li class="nav-item" id="therapistViewItem" style="display: none;">
+              <a href="users.html" class="nav-link text-dark">Pacientes</a>
+            </li>
+            <li class="nav-item mt-3">
+              <a href="#" id="logoutBtn" class="nav-link text-danger">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-4 col-md-9">
+      <h1>Eventos del paciente</h1>
+      <ul id="eventItems" class="list-group"></ul>
+    </div>
   </div>
 </body>
+
 </html>

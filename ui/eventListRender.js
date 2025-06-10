@@ -1,4 +1,4 @@
-export function renderEventList(events, onDelete, onDetails) {
+export function renderEventList(events, onDelete, onDetails, showDeleteButton = true) {
     const list = document.getElementById("eventItems");
     list.innerHTML = "";
 
@@ -22,12 +22,12 @@ export function renderEventList(events, onDelete, onDetails) {
         <small>${event.date}</small>
       </span>
       <div>
-        <span class="badge rounded-pill" style="background:${event.color};">&nbsp;</span>
-        <button class="btn btn-sm btn-outline-danger ms-2">✕</button>
+        <span class="badge rounded-pill w-3 h-3" style="background:${event.color};">&nbsp;</span>
+        ${showDeleteButton ? '<button class="btn btn-sm btn-outline-danger ms-2">✕</button>' : ''}
       </div>
     `;
         item.addEventListener("click", () => onDetails(event));
-        item.querySelector("button").addEventListener("click", () => onDelete(event.uid));
+        item.querySelector("button")?.addEventListener("click", () => onDelete(event.uid));
         list.appendChild(item);
     });
 }
