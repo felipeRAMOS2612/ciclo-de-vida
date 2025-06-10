@@ -10,11 +10,17 @@ export function importSidebar() {
         const user = JSON.parse(localStorage.getItem("currentUser"));
         if (!user) return location.href = "home.html";
         if (user.role === "therapist") {
-            document.getElementById("therapistViewItem").style.display = "block";
+            document.querySelectorAll(".therapistViewItem").forEach(item => {
+                item.style.display = "block";
+            });
         }
-        document.getElementById("logoutBtn").addEventListener("click", () => {
-            localStorage.removeItem("currentUser");
-            location.href = "home.html";
+        const logoutButtons = document.querySelectorAll(".logout");
+        logoutButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                console.log("Cerrando sesión...");
+                localStorage.removeItem("currentUser");
+                location.href = "home.html";
+            });
         });
     });
 }

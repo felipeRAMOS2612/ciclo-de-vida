@@ -1,4 +1,3 @@
-<!-- pages/patient-events.html -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,45 +8,24 @@
   
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/bootstrap.css" />
-  <script type="module" src="../services/patientEventsPage.js" defer></script>
 </head>
 
-<body>
+<body class="bg-light">
   <div class="row">
-    <div id="sidebar-container" class="col-md-3 d-none d-md-block">
-    </div>
-    <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse"
-          aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="sidebarCollapse">
-          <ul class="navbar-nav flex-column">
-            <li class="nav-item">
-              <a href="/index.html" class="nav-link text-dark">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a href="/pages/profile.html" class="nav-link text-dark">Mi Perfil</a>
-            </li>
-            <li class="nav-item">
-              <a href="/pages/events.html" class="nav-link text-dark">Mis Eventos</a>
-            </li>
-            <li class="nav-item" id="therapistViewItem" style="display: none;">
-              <a href="users.html" class="nav-link text-dark">Pacientes</a>
-            </li>
-            <li class="nav-item mt-3">
-              <a href="#" id="logoutBtn" class="nav-link text-danger">Cerrar sesión</a>
-            </li>
-          </ul>
-        </div>
+    <div id="sidebar-container" class="col-md-3">
       </div>
-    </nav>
     <div class="container mt-4 col-md-9">
       <h1>Eventos del paciente</h1>
       <ul id="eventItems" class="list-group"></ul>
     </div>
   </div>
+
+  <script type="module" src="../services/patientEventsPage.js"></script>
+  <script type="module" src="../main.js"></script>
+
+    <script type="module" src="../auth/authUtils.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
